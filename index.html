@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelas XI RPL 1</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #080b18;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Background */
+    body::before {
+      content: "";
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: #6c4cff;
+      filter: blur(180px);
+      opacity: .18;
+      top: -150px;
+      left: -150px;
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      width: 450px;
+      height: 450px;
+      background: #00d9ff;
+      filter: blur(180px);
+      opacity: .12;
+      right: -150px;
+      bottom: -150px;
+      z-index: -1;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(8, 11, 24, .65);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      background: linear-gradient(90deg, #8c6cff, #00d9ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav a {
+      color: #c9ccda;
+      text-decoration: none;
+      font-size: 14px;
+      transition: .3s;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 20px 80px;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 9px 18px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.06);
+      border-radius: 50px;
+      color: #b8b4ff;
+      font-size: 13px;
+      margin-bottom: 25px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero h1 {
+      font-size: clamp(50px, 9vw, 100px);
+      line-height: .95;
+      font-weight: 800;
+      letter-spacing: -4px;
+      background: linear-gradient(135deg, #fff 20%, #8d72ff 60%, #00d9ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: #a9adbf;
+      margin: 28px auto;
+      max-width: 600px;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 25px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7257ff, #00bce8);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 10px 35px rgba(80, 70, 255, .25);
+      transition: .3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(80, 70, 255, .4);
+    }
+
+    /* General */
+    section {
+      padding: 100px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .section-title span {
+      color: #7f6aff;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .section-title h2 {
+      font-size: 40px;
+      margin-top: 8px;
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 30px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .stat h3 {
+      font-size: 35px;
+      background: linear-gradient(90deg,#8b73ff,#00d9ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .stat p {
+      color: #9297ab;
+      font-size: 14px;
+    }
+
+    /* Members */
+
+/* Foto Wali Kelas */
+.wali-card {
+  grid-column: 1 / -1;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.wali-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.wali-card img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  background: #111525;
+}
+
+.wali-card img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  background: #111525;
+}
+
+    .members {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .member {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      transition: .4s;
+    }
+
+    .member:hover {
+      transform: translateY(-8px);
+      border-color: rgba(125,105,255,.6);
+      box-shadow: 0 20px 50px rgba(0,0,0,.3);
+    }
+
+    .member img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      filter: saturate(.9);
+      transition: .5s;
+    }
+
+    .member:hover img {
+      transform: scale(1.06);
+    }
+
+    .member-info {
+      padding: 18px;
+      position: relative;
+      background: linear-gradient(
+        to bottom,
+        rgba(20,22,40,.4),
+        rgba(20,22,40,.95)
+      );
+    }
+
+    .member-info h3 {
+      font-size: 17px;
+    }
+
+    .member-info p {
+      color: #8e93a8;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    /* Jadwal */
+    .schedule {
+      max-width: 900px;
+      margin: auto;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+      background: rgba(255,255,255,.04);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 18px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    th {
+      background: rgba(113,87,255,.18);
+      color: #aaa0ff;
+    }
+
+    td {
+      color: #c1c5d5;
+      font-size: 14px;
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 18px;
+      transition: .4s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+      filter: brightness(1.15);
+    }
+
+    /* Quote */
+    .quote {
+      max-width: 850px;
+      margin: auto;
+      padding: 50px;
+      text-align: center;
+      border-radius: 30px;
+      background: linear-gradient(
+        135deg,
+        rgba(116,87,255,.15),
+        rgba(0,217,255,.08)
+      );
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .quote h2 {
+      font-size: 30px;
+      line-height: 1.5;
+    }
+
+    .quote p {
+      color: #9297ab;
+      margin-top: 20px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      border-top: 1px solid rgba(255,255,255,.07);
+      color: #6f7488;
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .members {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav ul {
+        display: none;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .members {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .member img {
+        height: 210px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 75px 5%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">X PPLG 1</div>
+
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#anggota">Anggota</a></li>
+      <li><a href="#jadwal">Jadwal</a></li>
+      <li><a href="#galeri">Galeri</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+
+      <div class="badge">✨ Welcome to Our Class</div>
+
+      <h1>
+        X PPLG 1
+      </h1>
+
+      <p>
+        Satu kelas, satu cerita, satu perjalanan.
+        Tempat di mana persahabatan, perjuangan,
+        dan mimpi tumbuh bersama.
+      </p>
+
+      <a href="#anggota" class="btn">
+        Lihat Anggota →
+      </a>
+
+    </div>
+  </section>
+
+  <!-- STATISTIK -->
+  <section>
+    <div class="stats">
+
+      <div class="stat">
+        <h3>35</h3>
+        <p>Anggota Kelas</p>
+      </div>
+
+      <div class="stat">
+        <h3>21</h3>
+        <p>Siswa Laki-laki</p>
+      </div>
+
+      <div class="stat">
+        <h3>14</h3>
+        <p>Siswa Perempuan</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Wali Kelas -->
+  <section id="anggota">
+
+    <div class="section-title">
+      <span>Homeroom Teacher</span>
+      <h2>Wali Kelas</h2>
+    </div>
+
+<div class="member wali-card">
+  <img src="farhan.jpeg" alt="Foto Wali Kelas">
+
+  <div class="member-info">
+    <h3>Nurmu'min Sp'd</h3>
+    <p>Wali Kelas</p>
+  </div>
+</div>
+
+  <!-- ANGGOTA -->
+  <section id="anggota">
+
+    <div class="section-title">
+      <span>Our People</span>
+      <h2>Anggota Kelas</h2>
+    </div>
+
+    <div class="members">
+
+      <div class="member">
+        <img src="farhan.jpeg" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Farhan Ubaidurrahman</h3>
+          <p>Ketua Kelas</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="iqwal.jpeg" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Iqwal Kianez Alfarizi</h3>
+          <p>Wakil Ketua</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="ulan.jpeg" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Ulan Sari</h3>
+          <p>Sekretaris 1</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>xxxxxxx</h3>
+          <p>Sekertaris 2</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="desvita.jpeg" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Desvita Indah Permata</h3>
+          <p>Bendahara 1</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>xxxxx</h3>
+          <p>Bendahara 2</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="sifa.jpeg" alt="">
+        <div class="member-info">
+          <h3>Sifa Kurotu Aini</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="opik.jpeg" alt="Foto anggota">
+        <div class="member-info">
+          <h3>M.Rofik</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="celsia.jpeg" alt="Foto anggota">
+        <div class="member-info">
+          <h3>xxxxxx</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="melisa.jpeg" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+      <div class="member">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600" alt="Foto anggota">
+        <div class="member-info">
+          <h3>Dinda Maharani</h3>
+          <p>Anggota</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- JADWAL -->
+  <section id="jadwal">
+
+    <div class="section-title">
+      <span>Schedule</span>
+      <h2>Jadwal Pelajaran</h2>
+    </div>
+
+    <div class="schedule">
+
+      <table>
+        <tr>
+          <th>Hari</th>
+          <th>Jam</th>
+          <th>Mata Pelajaran</th>
+          <th>Guru</th>
+        </tr>
+
+        <tr>
+          <td>Senin</td>
+          <td>07.00 - 08.30</td>
+          <td>Matematika</td>
+          <td>Pak Budi</td>
+        </tr>
+
+        <tr>
+          <td>Selasa</td>
+          <td>08.00 - 09.30</td>
+          <td>Pemrograman</td>
+          <td>Bu Rina</td>
+        </tr>
+
+        <tr>
+          <td>Rabu</td>
+          <td>09.00 - 10.30</td>
+          <td>Bahasa Indonesia</td>
+          <td>Pak Andi</td>
+        </tr>
+
+        <tr>
+          <td>Kamis</td>
+          <td>07.30 - 09.00</td>
+          <td>Basis Data</td>
+          <td>Bu Sari</td>
+        </tr>
+
+        <tr>
+          <td>Jumat</td>
+          <td>08.00 - 09.30</td>
+          <td>Bahasa Inggris</td>
+          <td>Mr. John</td>
+        </tr>
+
+      </table>
+
+    </div>
+  </section>
+
+  <!-- GALERI -->
+  <section id="galeri">
+
+    <div class="section-title">
+      <span>Our Memories</span>
+      <h2>Galeri Kelas</h2>
+    </div>
+
+    <div class="gallery">
+
+      <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=900" alt="Kegiatan kelas">
+
+      <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=900" alt="Kegiatan kelas">
+
+      <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=900" alt="Kegiatan kelas">
+
+      <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900" alt="Kegiatan kelas">
+
+      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900" alt="Kegiatan kelas">
+
+      <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900" alt="Kegiatan kelas">
+
+    </div>
+
+  </section>
+
+  <!-- QUOTE -->
+  <section>
+
+    <div class="quote">
+      <h2>
+        “Bukan sekadar teman sekelas,
+        tapi keluarga yang tumbuh bersama.”
+      </h2>
+
+      <p>
+        XI RPL 1 • 2026
+      </p>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 XI RPL 1 — Made with ❤️ by Our Class
+  </footer>
+
+</body>
+</html>
