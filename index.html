@@ -420,11 +420,23 @@
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .table-container table {
     min-width: 1200px;
     width: 100%;
+  border-collapse: collapse;
+}
+
+    .table-container th,
+.table-container td {
+    padding: 20px;
+    white-space: nowrap;
+}
+
+.table-container td[rowspan] {
+    vertical-align: middle;
 }
     
     /* Tampilan jadwal di HP */
