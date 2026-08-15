@@ -159,6 +159,115 @@ section{padding:48px 0}.section-head{display:block}.section-head h2{font-size:25
     transform: translateY(-3px);
     background: var(--primary);
 }
+
+  /* =========================
+   KOMENTAR PENGUNJUNG
+========================= */
+
+.comments-section {
+  max-width: 1000px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+
+.comments-section .section-head {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.comments-section .section-kicker {
+  color: #9b7cff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+.comments-section h2 {
+  font-size: 38px;
+  margin: 0 0 10px;
+}
+
+.comments-section .section-head p {
+  color: var(--muted);
+}
+
+.comments-box {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 25px;
+}
+
+.comments-box input,
+.comments-box textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--line);
+  color: inherit;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 12px;
+  font-family: inherit;
+  outline: none;
+}
+
+.comments-box textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.comments-box input:focus,
+.comments-box textarea:focus {
+  border-color: #7a8bff;
+}
+
+.comments-box button {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  background: linear-gradient(90deg, #7a78ff, #3fc9ff);
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+#commentStatus {
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+#commentsList {
+  margin-top: 25px;
+}
+
+.comment-item {
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255,255,255,.03);
+}
+
+.comment-item strong {
+  font-size: 16px;
+}
+
+.comment-item p {
+  margin: 8px 0;
+  color: var(--muted);
+}
+
+.comment-item small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.no-comments {
+  text-align: center;
+  color: var(--muted);
+}
   
 </style>
 </head>
@@ -715,5 +824,122 @@ function searchMembers(q){
   });
 }
 </script>
+
+  </script>
+
+<!-- KOMENTAR PENGUNJUNG -->
+<section class="comments-section">
+  <div class="section-head">
+    <div class="section-kicker">COMMENTS</div>
+    <h2>Komentar Pengunjung</h2>
+    <p>Bagikan pendapatmu tentang website kelas kami.</p>
+  </div>
+
+  <div class="comments-box">
+    <input type="text" id="commentName" placeholder="Nama kamu" maxlength="50">
+
+    <textarea id="commentText" placeholder="Tulis komentar..." maxlength="500"></textarea>
+
+    <button onclick="sendComment()">Kirim Komentar</button>
+
+    <div id="commentStatus"></div>
+
+    <div id="commentsList"></div>
+  </div>
+</section>
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = 'https://bdsdnrsngdqbrvbjgmlr.supabase.co';
+
+// GANTI bagian ini dengan Publishable key kamu
+const SUPABASE_KEY = 'sb_publishable_XYU4uO7bQlVqXzbxJv2qeg_knsIaYJL';
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+// Mengambil komentar
+async function loadComments() {
+  const { data, error } = await supabaseClient
+    .from('comments')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  const list = document.getElementById('commentsList');
+
+  if (!data || data.length === 0) {
+    list.innerHTML = '<p class="no-comments">Belum ada komentar.</p>';
+    return;
+  }
+
+  list.innerHTML = data.map(item => `
+    <div class="comment-item">
+      <strong>${escapeHTML(item.name)}</strong>
+      <p>${escapeHTML(item.comment)}</p>
+      <small>${new Date(item.created_at).toLocaleString('id-ID')}</small>
+    </div>
+  `).join('');
+}
+
+// Mengirim komentar
+async function sendComment() {
+  const name = document.getElementById('commentName').value.trim();
+  const comment = document.getElementById('commentText').value.trim();
+  const status = document.getElementById('commentStatus');
+
+  if (!name || !comment) {
+    status.textContent = 'Nama dan komentar harus diisi.';
+    return;
+  }
+
+  status.textContent = 'Mengirim...';
+
+  const { error } = await supabaseClient
+    .from('comments')
+    .insert([
+      {
+        name: name,
+        comment: comment
+      }
+    ]);
+
+  if (error) {
+    console.error(error);
+    status.textContent = 'Komentar gagal dikirim.';
+    return;
+  }
+
+  document.getElementById('commentName').value = '';
+  document.getElementById('commentText').value = '';
+
+  status.textContent = 'Komentar berhasil dikirim!';
+
+  loadComments();
+}
+
+// Mencegah HTML dimasukkan sebagai komentar
+function escapeHTML(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+loadComments();
+</script>
+
+</body>
+</html>
 </body>
 </html>
