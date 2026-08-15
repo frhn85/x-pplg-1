@@ -269,52 +269,51 @@ section{padding:48px 0}.section-head{display:block}.section-head h2{font-size:25
   color: var(--muted);
 }
 
-  /* Mengecilkan Menu Cepat */
-.quick-menu {
-    padding: 18px 20px;
-    margin: 20px auto;
-    max-width: 650px;
+/* =========================
+   MENU CEPAT - LEBIH KECIL
+========================= */
+
+.quick-panel {
+    width: 92%;
+    max-width: 700px;
+    margin: 20px auto 35px;
+    padding: 14px;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
 }
 
-.quick-menu h2 {
-    font-size: 24px;
-    margin-bottom: 14px;
+.quick-title {
+    font-size: 20px;
+    margin-bottom: 0;
 }
 
-.quick-links {
-    gap: 10px;
+.quick {
+    padding: 9px 12px;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    border-radius: 12px;
 }
 
-.quick-links a,
-.quick-link,
-.menu-item {
-    padding: 12px 16px;
-    min-height: 48px;
-    font-size: 15px;
-    border-radius: 16px;
-}
-
-  @media (max-width: 600px) {
-    .quick-menu {
-        padding: 14px 16px;
-        margin: 15px 10px;
+/* Tampilan HP */
+@media (max-width: 600px) {
+    .quick-panel {
+        width: 94%;
+        max-width: 600px;
+        padding: 12px;
+        margin: 15px auto 30px;
+        gap: 7px;
     }
 
-    .quick-menu h2 {
-        font-size: 21px;
-        margin-bottom: 10px;
+    .quick-title {
+        font-size: 19px;
     }
 
-    .quick-links {
-        gap: 8px;
-    }
-
-    .quick-links a,
-    .quick-link,
-    .menu-item {
-        padding: 10px 12px;
-        min-height: 42px;
-        font-size: 14px;
+    .quick {
+        padding: 8px 10px;
+        min-height: 40px;
+        font-size: 11px;
     }
 }
   
