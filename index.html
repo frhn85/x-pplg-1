@@ -99,7 +99,13 @@ nav{padding:12px 5%}.menu-btn{display:block}.nav-links{display:none;position:abs
 .clock{position:relative;right:auto;top:auto;display:inline-block;margin:0 0 25px 25px}
 .stats{grid-template-columns:1fr 1fr;margin-bottom:40px}.stat{padding:18px 10px}
 section{padding:48px 0}.section-head{display:block}.section-head h2{font-size:25px}
-.dashboard{grid-template-columns:1fr 1fr}.quick-panel{grid-column:1/-1}.members{grid-template-columns:repeat(2,1fr);gap:10px}
+.dashboard{grid-template-columns:1fr 1fr}
+  .structure-card.wali{
+    grid-column:1 / -1;
+    justify-self:center;
+    width:70%;
+}
+  .quick-panel{grid-column:1/-1}.members{grid-template-columns:repeat(2,1fr);gap:10px}
 .member img{height:205px}.gallery{grid-template-columns:repeat(2,1fr)}.gallery img{height:160px}
 }
 @media(max-width:430px){
