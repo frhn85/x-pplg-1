@@ -42,9 +42,9 @@ nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:14px 4%;backgrou
 .clock strong{font-size:17px}
 section{padding:60px 0}
 .section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:25px}
-.section-head .eyebrow{font-size:11px;color:#9d84ff;font-weight:800;letter-spacing:2px;text-transform:uppercase}
-.section-head h2{font-size:30px;margin-top:4px;text-align:center}
-.section-head p{color:var(--muted);font-size:13px;margin-top:5px}
+.section-head{text-align:center;} .eyebrow{font-size:11px;color:#9d84ff;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+.section-head h2{font-size:30px;margin-top:4px;text-align:center;}
+.section-head p{color:var(--muted);font-size:13px;margin-top:5px;text-align:center;}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:55px}
 .stat,.quick-panel,.structure-card,.member,.schedule-wrap,.gallery-wrap,.quote{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 55px rgba(0,0,0,.16)}
 .stat{padding:22px;text-align:center}
@@ -113,6 +113,12 @@ section{padding:48px 0}.section-head{display:block}.section-head h2{font-size:25
 .dashboard{grid-template-columns:1fr 1fr}.structure-card{padding:13px 8px}.structure-card img{width:70px;height:70px}.structure-card h3{font-size:12px}
 .quick-panel{padding:12px;gap:7px}.quick{padding:11px 8px;font-size:10px}.member img{height:175px}.member-info{padding:10px}.member-info h3{font-size:12px}
 .gallery{gap:8px}.gallery img{height:130px}.quote{padding:25px 18px}.quote h2{font-size:19px}
+}
+  /* Membuat seluruh judul section berada di tengah */
+.section-head,
+.section-head h2,
+.section-head p{
+    text-align:center !important;
 }
 </style>
 </head>
